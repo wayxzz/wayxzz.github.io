@@ -25,7 +25,7 @@ Web缓存大致可分为:数据库缓存,服务器端缓存(代理服务器缓�
 
 匹配流程
 
-![](https://user-gold-cdn.xitu.io/2017/10/12/6897e7bb30d063f5e7a0a36101568c7a?imageView2/0/w/1280/h/960/ignore-error/1)
+![](https://github.com/wayxzz/wayxzz.github.io/raw/master/HTTP/images/171019001.png)
 
 ## 强缓存
 
@@ -40,10 +40,12 @@ Expires指缓存过期时间,超过了这个时间点就代表资源过期.由�
 Cache-control由多个字段组合而成,主要有以下几个取值:
 
 1. **max-age** 指定一个时间长度,在这个时间段内缓存是有效的,单位是秒(s).例如设置 `Cache-Control:max-age=31536000` ,也就是缓存有效期为(31536000/24/360)天,第一次访问这个资源的时候,服务器端也返回了`Expires`字段,并且过期时间是一年后:
-![](https://user-gold-cdn.xitu.io/2017/10/12/5f4dd5fb278b21b76da14ec25377db5e?imageView2/0/w/1280/h/960/ignore-error/1)
 
-  在没有禁用缓存并且没有超过有效时间的情况下,再次访问这个资源就命中了缓存,不会向服务器端请求资源而是直接从浏览器缓存中取.
-![](https://user-gold-cdn.xitu.io/2017/10/12/5f4dd5fb278b21b76da14ec25377db5e?imageView2/0/w/1280/h/960/ignore-error/1)
+![](https://github.com/wayxzz/wayxzz.github.io/raw/master/HTTP/images/171019002.png)
+
+在没有禁用缓存并且没有超过有效时间的情况下,再次访问这个资源就命中了缓存,不会向服务器端请求资源而是直接从浏览器缓存中取.
+
+![](https://github.com/wayxzz/wayxzz.github.io/raw/master/HTTP/images/171019003.png)
 
 2. **s-maxage** 同`max-age`,覆盖`max-age`和`Expires`,但仅适用用共享缓存,在私有缓存中被忽略.
 3. **public** 表明响应可以被任何对象(发送请求的客户端,代理服务器等)缓存.
@@ -61,7 +63,7 @@ Cache-control由多个字段组合而成,主要有以下几个取值:
 
 `Last-Modified`: 服务器端资源最后修改的时间,响应头会带上这个标识.第一次请求后,浏览器会记录这个时间,再次请求时,请求头部带上`If-Modified-Since`即为之前记录下的时间.服务器端收到带`If-Modified-Since`的请求后会和资源的最后修改时间对比.若修改过返回最新资源,状态码`200`, 若没有修改过则返回`304`.
 
-![](https://user-gold-cdn.xitu.io/2017/10/12/c785aa638c10f7adfe27492c82aa1e60?imageView2/0/w/1280/h/960/ignore-error/1)
+![](https://github.com/wayxzz/wayxzz.github.io/raw/master/HTTP/images/171019004.png)
 
 **注意**:如果响应头中有 `Last-modified` 而没有 `Expire` 或 `Cache-Control` 时，浏览器会有自己的算法来推算出一个时间缓存该文件多久，不同浏览器得出的时间不一样，所以 `Last-modified` 要记得配合 `Expires/Cache-Control` 使用。
 
@@ -70,7 +72,7 @@ Cache-control由多个字段组合而成,主要有以下几个取值:
 
 由服务器上生成一段hash字符串,第一次请求时响应头带上`ETag:abcd`,之后的请求带上`If-None-match:abcd`, 服务器检查ETag,返回304或200.
 
-![](https://user-gold-cdn.xitu.io/2017/10/12/94f6230ea5be20e83eb69ada69ca1ee8?imageView2/0/w/1280/h/960/ignore-error/1)
+![](https://github.com/wayxzz/wayxzz.github.io/raw/master/HTTP/images/171019005.png)
 
 ### last-modified 和 Etag 区别
 
@@ -83,7 +85,7 @@ Cache-control由多个字段组合而成,主要有以下几个取值:
 
 ## 选择 Cache-Control 的策略（摘自 Google Developers）
 
-![](https://user-gold-cdn.xitu.io/2017/10/12/1b413b65743cdef241a426d75bf81555?imageView2/0/w/1280/h/960/ignore-error/1)
+![](https://github.com/wayxzz/wayxzz.github.io/raw/master/HTTP/images/171019006.png)
 
 ## 实际应用
 
@@ -113,9 +115,9 @@ Cache-control由多个字段组合而成,主要有以下几个取值:
 
 有看到用对话的形式来描述这个过程，便仿照着试图更清晰地解释：
 
-![](https://user-gold-cdn.xitu.io/2017/10/12/454acb384c3a5a8f81485a07fa63c983?imageView2/0/w/1280/h/960/ignore-error/1)
+![](https://github.com/wayxzz/wayxzz.github.io/raw/master/HTTP/images/171019007.png)
 
-![](https://user-gold-cdn.xitu.io/2017/10/12/21e40026b5950ef6a0b2794f1cf91543?imageView2/0/w/1280/h/960/ignore-error/1)
+![](https://github.com/wayxzz/wayxzz.github.io/raw/master/HTTP/images/171019008.png)
 
 ### 可能经常需要变动的文件
 
@@ -123,6 +125,6 @@ Cache-control由多个字段组合而成,主要有以下几个取值:
 
 比如入口 index.html 文件、文件内容改变但名称不变的资源。选择 ETag 或 Last-Modified 来做验证，在使用缓存资源之前一定会去服务器端做验证，命中缓存时会比第一种情况慢一点点，毕竟还要发请求进行通信。
 
-![](https://user-gold-cdn.xitu.io/2017/10/12/454acb384c3a5a8f81485a07fa63c983?imageView2/0/w/1280/h/960/ignore-error/1)
+![](https://github.com/wayxzz/wayxzz.github.io/raw/master/HTTP/images/171019009.png)
 
-![](https://user-gold-cdn.xitu.io/2017/10/12/946aa2998724789889decf59c33f702b?imageView2/0/w/1280/h/960/ignore-error/1)
+![](https://github.com/wayxzz/wayxzz.github.io/raw/master/HTTP/images/171019010.png)
