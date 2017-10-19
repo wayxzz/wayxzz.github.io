@@ -19,7 +19,8 @@ getPoint(ev, index){
 ### 向量(Vector)
 是坐标系中一种**既有大小也有方向的线段**,例如由原点O(0,0)指向点A(1,1)的箭头线段,称为向量a,则a = (1-0,1-0) = (1,1).
 如下图所示,其中i与j向量称为该坐标系的单位向量,也称为基向量,我们常见坐标系单位为1,即i=(1, 0),j=(0,1).
-![图1](https://sfault-image.b0.upaiyun.com/135/825/1358258230-59847ed4a6e63_articlex)
+
+![](https://github.com/wayxzz/wayxzz.github.io/raw/master/H5/images/171019101.png)
 
 获取向量的函数:
 ```javascript
@@ -33,7 +34,7 @@ getVector(p1, p2) {
 ### 向量模
 代表**向量的长度**,记为`|a|` 是一个标量,没有大小,没有方向.
 几何意义代表的是以`x,y`为直角边的直角三角形的斜边,通过勾股定理进行计算.
-![图2](https://sfault-image.b0.upaiyun.com/189/378/1893784804-59847f0835cd5_articlex)
+![](https://github.com/wayxzz/wayxzz.github.io/raw/master/H5/images/171019102.png)
 
 `getLength`函数:
 ```js
@@ -103,7 +104,7 @@ getAngle(v1, v2) {
 A图表示变换之前的坐标系,此时a=(-1,2),通过矩阵变换后,基于i, j的变换引起了坐标系的变换,变成了下图B,因此a向量由(-1, 2)变换成了(5, -2);
 > 其实向量与坐标系的关联不变(a=-i + 2j),是基向量引起坐标系变化,然后坐标系沿用关联导致了向量的变化;
 
-![](https://sfault-image.b0.upaiyun.com/328/770/3287703221-59848033abb15_articlex)
+![](https://github.com/wayxzz/wayxzz.github.io/raw/master/H5/images/171019103.png)
 
 #### 结合代码
 
@@ -111,7 +112,7 @@ A图表示变换之前的坐标系,此时a=(-1,2),通过矩阵变换后,基于i,
 
 通常在二维坐标系中,只需要2\*2的矩阵便足以描述所有的变换了,但由于css是处于3D环境中的,因此css中使用的是3\*3的矩阵,表示为:
 
-![](https://sfault-image.b0.upaiyun.com/521/131/521131991-5984804c9c4ae_articlex)
+![](https://github.com/wayxzz/wayxzz.github.io/raw/master/H5/images/171019104.png)
 
 其实第三行的`0,0,1`代表的就是z轴的默认参数.这个矩阵中,`(a,b)`即为坐标轴的`i`基,而`(c,d)`即为`j`基,`e`为`x`轴的偏移量,`f`为`y`轴的偏移量;因此上栗便很好理解,`translate`并没有导致`i,j`基改变,只是发生了偏移,因此`translate(-30px, -30px) =>matrix(1,0,0,1,30,30)`.
 
@@ -129,7 +130,7 @@ transform:scale(s) ==> transform:matrix(s,0,0,s,0,0)
 
 `translate/rotate/scale`等语法十分强大,让代码更为可读且方便书写,但是`matrix`有着更强大的转换特性,通过`matrix`,可以发生任何方式的变换,例如我们常见的**镜像对称**,`transform:matrix(-1,0,0,1,0,0)`;
 
-![](https://sfault-image.b0.upaiyun.com/429/250/4292507316-5984806781903_articlex)
+![](https://github.com/wayxzz/wayxzz.github.io/raw/master/H5/images/171019105.png)
 
 #### MatrixTo
 
@@ -147,7 +148,7 @@ sin(θ·π/180)*s=1.41421;
 
 将两个不等式相除,即可以求出`θ`和`s`了,函数如下:
 
-![](https://sfault-image.b0.upaiyun.com/199/610/1996102881-5984807d26d7f_articlex)
+![](https://github.com/wayxzz/wayxzz.github.io/raw/master/H5/images/171019106.png)
 
 ## 手势原理
 
@@ -161,7 +162,7 @@ b向量/B点: 代表在touchmove时获取的实时向量/实时点;
 
 ### Drag(拖动事件)
 
-![](https://sfault-image.b0.upaiyun.com/602/224/602224203-5984808fdd5cf_articlex)
+![](https://github.com/wayxzz/wayxzz.github.io/raw/master/H5/images/171019107.png)
 
 上图是模拟了拖动手势,由`A`点移动到`B`点,要计算的便是这个过程的偏移量;
 因此我们在`touchstart`中记录初始点`A`的坐标:
@@ -191,7 +192,7 @@ _evevntFire('drag', {
 
 ### Pinch(双指缩放)
 
-![](https://sfault-image.b0.upaiyun.com/126/654/1266545224-598480a384b3a_articlex)
+![](https://github.com/wayxzz/wayxzz.github.io/raw/master/H5/images/171019108.png)
 
 上图是双指缩放的模拟图,双指由`a`向量放大到`b`向量,通过初始状态时的`a`向量的模与`touchmove`中获取的`b`向量的进行计算,便可得出缩放值:
 
@@ -213,7 +214,7 @@ this._eventFire('pinch', {
 
 ### Rotate(双指旋转)
 
-![](https://sfault-image.b0.upaiyun.com/858/061/858061720-598480b5a3ad5_articlex)
+![](https://github.com/wayxzz/wayxzz.github.io/raw/master/H5/images/171019109.png)
 
 初始时双指向量`a`,旋转到`b`向量, `θ`便是我们需要的值，因此只要通过我们上面构建的getAngle函数，便可求出旋转的角度：
 
@@ -235,7 +236,7 @@ this._eventFire('rotate', {
 
 ### singlePinch(单指缩放)
 
-![](https://sfault-image.b0.upaiyun.com/379/638/3796387613-598480cc21d2f_articlex)
+![](https://github.com/wayxzz/wayxzz.github.io/raw/master/H5/images/171019110.png)
 
 单指缩放和danzhi旋转需要多个特有概念:
 
@@ -267,7 +268,7 @@ this._eventFire('singlePinch', {
 
 ### singleRotate(单指旋转)
 
-![](https://sfault-image.b0.upaiyun.com/285/525/2855252767-598480e13aa7d_articlex)
+![](https://github.com/wayxzz/wayxzz.github.io/raw/master/H5/images/171019111.png)
 
 ```js
 // 获取初始向量与实时向量
