@@ -9,7 +9,7 @@
 "analyz": “NODE_ENV=production npm_config_report=true npm run build”
 ```
 
-![]()
+![](https://github.com/wayxzz/wayxzz.github.io/raw/master/Project/images/171023101.png)
 
 当然，同类型的还有 [webpack-chart](http://alexkuz.github.io/webpack-chart/) 以及 [webpack-analyse](http://webpack.github.io/analyse/)，这两个站点也是以可视方式呈现构造的组件，可以让你清楚的看到模块的组成部分；不过稍显麻烦的是，你需要运行以下命令，生成工具分析所需要的 json 文件：
 
