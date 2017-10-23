@@ -119,7 +119,7 @@ new ParallelUglifyPlugin({
 
 你知道，`Webpack` 中为了方便各种资源和类型的加载，设计了以 `loader` 加载器的形式读取资源，但是受限于 nodejs 的编程模型影响，所有的 `loader` 虽然以 `async`的形式来并发调用，但是还是运行在单个 `node` 的进程，以及在同一个事件循环中，这就直接导致了些问题：当同时读取多个loader文件资源时，比如 `babel-loader` 需要 transform 各种jsx，es6的资源文件。在这种同步计算同时需要大量耗费 cpu 运算的过程中，node的单进程模型就无优势了，而 [Happypack](https://github.com/amireh/happypack) 就是针对解决此类问题而生的存在。
 
-![]()
+![](https://github.com/wayxzz/wayxzz.github.io/raw/master/Project/images/171023201.png)
 
 `Happypack` 的处理思路是：将原有的 `webpack` 对 `loader` 的执行过程，从单一进程的形式扩展多进程模式，从而加速代码构建；原本的流程保持不变，这样可以在不修改原有配置的基础上，来完成对编译过程的优化，具体配置如下：
 
@@ -149,7 +149,7 @@ plugins: [
 
 可以研究看到，通过在 `loader` 中配置直接指向 `happypack` 提供的 `loader`，对于文件实际匹配的处理 loader，则是通过配置在 plugin 属性来传递说明，这里 happypack 提供的 loader 与 plugin 的衔接匹配，则是通过id=happybabel来完成。配置完成后，laoder的工作模式就转变成了如下所示：
 
-![]()
+![](https://github.com/wayxzz/wayxzz.github.io/raw/master/Project/images/171023202.png)
 
 `Happypack` 在编译过程中，除了利用多进程的模式加速编译，还同时开启了 cache 计算，能充分利用缓存读取构建文件，对构建的速度提升也是非常明显的；更多关于 happyoack 个中原理，可参见 @淘宝前端团队(FED) 的这篇：[happypack 原理解析](https://taobaofed.org/blog/2016/12/08/happypack-source-code-analysis/)。如果你使用的 Vue.js 框架来开发，也可参考 [vue-webpack-happypack](https://github.com/nicejade/vue-boilerplate-template/blob/master/build/webpack.base.conf.js) 相关配置。
 
