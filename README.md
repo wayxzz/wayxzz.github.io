@@ -33,3 +33,8 @@
 ## BUG
 
 [一次nodejs请求持续性pending问题的排查](https://github.com/wayxzz/wayxzz.github.io/blob/master/Bug/%E4%B8%80%E6%AC%A1nodejs%E8%AF%B7%E6%B1%82%E6%8C%81%E7%BB%AD%E6%80%A7pending%E9%97%AE%E9%A2%98%E7%9A%84%E6%8E%92%E6%9F%A5.md)
+
+
+## VUE
+
+[深入浅出基于“依赖收集”的响应式原理](https://github.com/wayxzz/wayxzz.github.io/blob/master/VUE/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E5%9F%BA%E4%BA%8E%E2%80%9C%E4%BE%9D%E8%B5%96%E6%94%B6%E9%9B%86%E2%80%9D%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86.md)
