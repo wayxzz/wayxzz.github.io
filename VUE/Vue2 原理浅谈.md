@@ -307,7 +307,7 @@ $watcher其实就是一个new Watcher的封装
 
 现在我们再来看看Vue官网的这张图
 
-![]()
+![](https://github.com/wayxzz/wayxzz.github.io/raw/master/VUE/images/1710270101.png)
 
 至少目前我们对右半部分很清晰了，Data如何和Watcher联系已经很清楚，但是Render Function，Watcher怎么Trigger Render Function这个还需要去解答，当然还有左下角的Virtual DOM Tree
 
@@ -365,7 +365,7 @@ Vue.prototype._render = function (): VNode {
 
 如果熟悉Vue2的朋友可能知道，Vue提供了一个选项是render就是作为这个函数的，假如没有提供这个选项呢我们不妨看看生命周期
 
-![]()
+![](https://github.com/wayxzz/wayxzz.github.io/raw/master/VUE/images/1710270102.png)
 
 我们可以看到`Compile template into render function`（没有template会将el的outerHTML当成template),所以这里就有一个模板编译的过程
 
@@ -447,7 +447,7 @@ vm._update部分也是跟virtual dom有关，下一节具体介绍，我们可�
 
 我们再一次来看看Vue官网的这张图
 
-![]()
+![](https://github.com/wayxzz/wayxzz.github.io/raw/master/VUE/images/1710270101.png)
 
 ## Virtual DOM
 
@@ -459,7 +459,7 @@ vm._update部分也是跟virtual dom有关，下一节具体介绍，我们可�
 为啥慢呢？
 我们可以尝试打出一层DOM的key
 
-![]()
+![](https://github.com/wayxzz/wayxzz.github.io/raw/master/VUE/images/1710270103.png)
 
 我们可以看出它的属性是庞大，更何况这只是一层
 同时直接对DOM的操作，就必须很注意一些有可能触发重排的操作。
@@ -556,7 +556,7 @@ Vue.prototype._update = function (vnode: VNode, hydrating?: boolean) {
 
 引用一张React经典的图来帮助大家理解吧，左右同一颜色圈起来的就是比较／复用的范围
 
-![]()
+![](https://github.com/wayxzz/wayxzz.github.io/raw/master/VUE/images/1710270104.png)
 
 步入正题，我们看看Vue的patch函数
 
